@@ -12,7 +12,7 @@ export class User {
     email!:string;
 
     @Column('text')
-    passwordHash!:string;
+    password!:string;
 
     @CreateDateColumn({name: 'createdat'})
     createdAt!: Date;

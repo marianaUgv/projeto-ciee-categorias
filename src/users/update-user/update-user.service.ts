@@ -1,4 +1,29 @@
-import { Injectable } from '@nestjs/common';
-
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { User } from '../utils/entity/user.entity';
+import * as bcrypt from 'bcrypt';
+import { UpdateUserDto } from '../utils/dto/update-user.dto';
 @Injectable()
-export class UpdateUserService {}
+export class UpdateUserService {
+    constructor(
+        @Inject('USER_REPOSITORY')
+        private userRepository: Repository<User>,
+    ) { }
+    async execute(id: number, updateUserDto: UpdateUserDto): Promise<User> {
+        const user = await this.userRepository.findOne({
+            where: {
+                id
+            }
+        }); 
+        if(!user){
+            throw NotFoundException
+        }
+        if (updateUserDto.password) {
+            const salt = await bcrypt.genSalt(10);
+            updateUserDto.password = await bcrypt.hash(updateUserDto.password, salt);
+        }
+
+        const updatedUser = this.userRepository.merge(user, updateUserDto);
+        return await this.userRepository.save(updatedUser);
+    }
+}
