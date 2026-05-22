@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { AccountsRepository } from '../models/user.repository';
+import { AccountsRepository } from '../models/account.repository';
 import { Accounts } from '../models/entity/account.entity';
 import { UpdateAccountDto } from '../models/dto/update-account.dto';
 

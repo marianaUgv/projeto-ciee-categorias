@@ -17,10 +17,15 @@ import { FindAccountByIdService } from './account/find-account-by-id/find-accoun
 import { FindAccountByIdController } from './account/find-account-by-id/find-account-by-id.controller';
 import { UpdateBalanceController } from './account/update-balance/update-balance.controller';
 import { UpdateBalanceService } from './account/update-balance/update-balance.service';
+import { FindUserByIdController } from './users/find-user-by-id/find-user-by-id.controller';
+import { FindUserByIdService } from './users/find-user-by-id/find-user-by-id.service';
+import { FindCategoryByIdService } from './categories/find-category-by-id/find-category-by-id.service';
+import { FindControllerByIdService } from './find-controller-by-id/find-controller-by-id.service';
+import { FindCategoryByIdController } from './categories/find-category-by-id/find-category-by-id.controller';
 
 @Module({
   imports: [UsersModule, DatabaseModule, CategoriesModule, UsersModule, AccountModule],
-  controllers: [AppController, CreateAccountController, UpdateAccountController, DeleteAccountController, FindAllAccountsController, FindAccountByIdController, UpdateBalanceController],
-  providers: [AppService, CreateAccountService, UpdateAccountService, DeleteAccountService, FindAllAccountsService, FindAccountByIdService, UpdateBalanceService],
+  controllers: [AppController, CreateAccountController, UpdateAccountController, DeleteAccountController, FindAllAccountsController, FindAccountByIdController, UpdateBalanceController, FindUserByIdController, FindCategoryByIdController],
+  providers: [AppService, CreateAccountService, UpdateAccountService, DeleteAccountService, FindAllAccountsService, FindAccountByIdService, UpdateBalanceService, FindUserByIdService, FindCategoryByIdService, FindControllerByIdService],
 })
 export class AppModule {}

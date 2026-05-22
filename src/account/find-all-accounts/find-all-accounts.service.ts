@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AccountsRepository } from '../models/user.repository';
+import { AccountsRepository } from '../models/account.repository';
 
 @Injectable()
 export class FindAllAccountsService {

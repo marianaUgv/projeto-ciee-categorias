@@ -1,4 +1,6 @@
-import { IsNotEmpty, IsString, Length, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsString, Length, IsOptional, ValidateNested } from 'class-validator';
+import { User } from '../../../users/utils/entity/user.entity';
+import { Type } from 'class-transformer';
 
 export class CreateCategoryDto {
   @IsString()
@@ -14,4 +16,8 @@ export class CreateCategoryDto {
   @IsString()
   @IsOptional()
   icon?: string;
+
+  @ValidateNested()
+  @Type(() => User)
+  user?: User;
 }
