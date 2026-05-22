@@ -8,7 +8,7 @@ export class FindUserByIdService {
     ) { }
     async execute(id: number) {
         const category = await this.usersRepository.findById(id)
-        if (!category) return NotFoundException;
+        if (!category) return new NotFoundException('Usuário não encontrado');
         return category;
     }
 }

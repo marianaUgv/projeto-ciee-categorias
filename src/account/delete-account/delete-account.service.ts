@@ -8,8 +8,8 @@ export class DeleteAccountService {
         ){}
         async execute(id:number){
             const account = await  this.accountRepository.findById(id);
-            if(!account) return NotFoundException;
-            return this.accountRepository.delete(account)
+            if(!account) throw new NotFoundException(`Conta com ID ${id} não encontrada.`);
+            return { message: `Conta '${account.name}' excluída com sucesso.` };
         }
 
 }

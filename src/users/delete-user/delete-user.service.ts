@@ -8,7 +8,7 @@ export class DeleteUserService {
         @Inject('USER_REPOSITORY')
         private userRepository: Repository<User>,
     ) { }
-    async execute(id: number): Promise<void> {
+    async execute(id: number) {
         const user = await this.userRepository.findOne({
             where:{id}
         }); 
@@ -16,5 +16,6 @@ export class DeleteUserService {
             throw NotFoundException
         }
         await this.userRepository.remove(user);
+        return { message: `Usuário '${user.name}' excluído com sucesso.` };
     }
 }

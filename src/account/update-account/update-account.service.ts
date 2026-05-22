@@ -10,11 +10,11 @@ export class UpdateAccountService {
     ){}
     async execute(id:number, updatedAccountDto: UpdateAccountDto){
         const account = await  this.accountRepository.findById(id);
-        if(!account) return NotFoundException;
+        if(!account) throw new NotFoundException(`Conta com ID ${id} não encontrada.`);
         const updatedAccount :Accounts= new Accounts();
         updatedAccount.name =  updatedAccountDto.name ?? account.name;
         updatedAccount.type = updatedAccountDto.type ?? account.type;
-        updatedAccount.initial_Balance = updatedAccount.initial_Balance ?? account.initial_Balance;
+        updatedAccount.initialBalance = updatedAccount.initialBalance ?? account.initialBalance;
         return this.accountRepository.update(account, updatedAccount)
     }
 }

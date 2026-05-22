@@ -6,19 +6,21 @@ export class UsersRepository {
         private readonly usersRepository: Repository<User>
     ){}
     async findAll(){
-        return this.usersRepository.find()
+        return await this.usersRepository.find()
     }
     async findById(id:number){
-        return this.usersRepository.findOneBy({id})
+        return await this.usersRepository.findOneBy({id})
     }
     async create(user: User){
-        return this.usersRepository.create(user)
+        return await this.usersRepository.create(user)
     }
     async update(user:User, updatedUser:User){
-        return this.usersRepository.save(this.usersRepository.merge(user, updatedUser))
+        return await this.usersRepository.save(this.usersRepository.merge(user, updatedUser))
     }
     async delete(user:User){
-        return this.usersRepository.remove(user)
+        return await this.usersRepository.remove(user)
     }
-    //fazer um pra atualizar o saldo?
+    async findByEmail(email:string){
+        return await this.usersRepository.find({where:{email}})
+    }
 }

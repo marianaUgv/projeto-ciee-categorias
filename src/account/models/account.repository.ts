@@ -6,19 +6,19 @@ export class AccountsRepository {
         private readonly accountsRepository: Repository<Accounts>
     ){}
     async findAll(){
-        return this.accountsRepository.find()
+        return await this.accountsRepository.find()
     }
     async findById(id:number){
-        return this.accountsRepository.findOneBy({id})
+        return await this.accountsRepository.findOneBy({id})
     }
     async create(account: Accounts){
-        return this.accountsRepository.create(account)
+        return await this.accountsRepository.create(account)
     }
     async update(account:Accounts, updatedAccount:Accounts){
-        return this.accountsRepository.save(this.accountsRepository.merge(account, updatedAccount))
+        return await this.accountsRepository.save(this.accountsRepository.merge(account, updatedAccount))
     }
     async delete(account:Accounts){
-        return this.accountsRepository.remove(account)
+        return await this.accountsRepository.remove(account)
     }
     //fazer um pra atualizar o saldo?
 }

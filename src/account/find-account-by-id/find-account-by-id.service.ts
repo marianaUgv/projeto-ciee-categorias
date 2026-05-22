@@ -8,7 +8,7 @@ export class FindAccountByIdService {
     ) { }
     async execute (id:number){
         const account = await this.accountRepository.findById(id)
-        if(!account) return NotFoundException;
+        if(!account) throw new NotFoundException(`Conta com ID ${id} não encontrada.`);;
         return account;
     }
 }

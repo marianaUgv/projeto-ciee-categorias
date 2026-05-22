@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { User } from '../../users/utils/entity/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -21,6 +21,7 @@ export class Category {
   icon!: string; 
 
   @ManyToOne(()=>User, (user)=> user.categorys)
+  @JoinColumn({ name: 'user_id' })
   user?: User;
 
   @ApiProperty({ example: '2026-03-24T12:00:00.000Z' })

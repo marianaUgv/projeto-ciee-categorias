@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { User } from '../utils/entity/user.entity';
 import * as bcrypt from 'bcrypt';
@@ -14,9 +14,15 @@ export class UpdateUserService {
             where: {
                 id
             }
-        }); 
-        if(!user){
-            throw NotFoundException
+        });
+        if (updateUserDto.email && updateUserDto.email !== user?.email) {
+            const emailExists = await this.userRepository.findOne({ where: { email: updateUserDto.email } });
+            if (emailExists) {
+                throw new ConflictException('Este e-mail já está sendo usado por outro usuário.');
+            }
+        }
+        if (!user) {
+            throw new NotFoundException('Usuário não encontrado')
         }
         if (updateUserDto.password) {
             const salt = await bcrypt.genSalt(10);

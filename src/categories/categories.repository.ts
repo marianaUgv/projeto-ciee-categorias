@@ -6,18 +6,18 @@ export class CategoriesRepository{
             private readonly categoryRepository: Repository<Category>
         ){}
         async findAll(){
-            return this.categoryRepository.find()
+            return await this.categoryRepository.find()
         }
         async findById(id:number){
-            return this.categoryRepository.findOneBy({id})
+            return await this.categoryRepository.findOneBy({id})
         }
         async create(category: Category){
-            return this.categoryRepository.create(category)
+            return await this.categoryRepository.create(category)
         }
         async update(category:Category, updatedCategory:Category){
-            return this.categoryRepository.save(this.categoryRepository.merge(category, updatedCategory))
+            return await this.categoryRepository.save(this.categoryRepository.merge(category, updatedCategory))
         }
         async delete(category:Category){
-            return this.categoryRepository.remove(category)
+            return await this.categoryRepository.remove(category)
         }
 }
