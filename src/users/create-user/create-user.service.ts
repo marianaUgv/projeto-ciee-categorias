@@ -3,6 +3,8 @@ import { CreateUserDto } from '../utils/dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { User } from '../utils/entity/user.entity';
 import { Repository } from 'typeorm';
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('Usuarios')
 @Injectable()
 export class CreateUserService {
     constructor(
